@@ -1,0 +1,16 @@
+<header class="header">
+  <div class="header-container">
+    <div class="logo-frame">
+      <span class="logo-text">JI</span>
+    </div>
+    <nav class="nav-frame">
+      <button 
+        *ngFor="let item of navItems; let i = index"
+        class="nav-item"
+        [class.active]="item.active"
+        (click)="setActive(i)">
+        {{ item.name }}
+      </button>
+    </nav>
+  </div>
+</header>

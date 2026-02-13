@@ -1,0 +1,118 @@
+.projects-section {
+  background-color: #0A0A0A;
+  padding: 80px 60px;
+}
+
+.projects-label {
+  display: block;
+  color: #EF3B36;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  margin-bottom: 24px;
+}
+
+.projects-title {
+  color: #FFFFFF;
+  font-size: 56px;
+  font-weight: 700;
+  font-family: 'Inter', sans-serif;
+  margin: 0 0 60px 0;
+}
+
+.projects-grid {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 24px;
+}
+
+.project-card {
+  background-color: #1A1A1A;
+  border: 1px solid #333333;
+  border-radius: 8px;
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  height: 100%;
+}
+
+.project-card:hover {
+  border-color: #EF3B36;
+  background-color: #252525;
+  transform: translateY(-8px);
+  box-shadow: 0 8px 24px rgba(239, 59, 54, 0.15);
+}
+
+.project-title {
+  color: #FFFFFF;
+  font-size: 20px;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+}
+
+.project-desc {
+  color: #A0A0A0;
+  font-size: 14px;
+  font-weight: normal;
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  flex-grow: 1;
+}
+
+.project-techs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.tech-tag {
+  background-color: #0A0A0A;
+  color: #EF3B36;
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
+}
+
+.project-link {
+  color: #EF3B36;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  align-self: flex-start;
+  margin-top: 8px;
+}
+
+.project-link:hover {
+  color: #d63230;
+  transform: translateX(4px);
+}
+
+@media (max-width: 768px) {
+  .projects-section {
+    padding: 40px 24px;
+  }
+
+  .projects-title {
+    font-size: 36px;
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .projects-label {
+    margin-bottom: 16px;
+  }
+}

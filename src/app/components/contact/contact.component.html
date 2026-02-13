@@ -1,0 +1,100 @@
+<section class="contact-section" id="contact-section">
+  <div class="contact-container">
+    <div class="form-header">
+      <label class="contact-label">▶ Contacto</label>
+      <h2 class="contact-title">Ponte en contacto</h2>
+      <p class="contact-desc">¿Tienes una pregunta o propuesta? Nos encantaría escucharte. Completa el formulario y te responderemos lo antes posible.</p>
+    </div>
+
+    <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="form-container">
+      <!-- Messages -->
+      <div *ngIf="successMessage" class="alert alert-success">
+        {{ successMessage }}
+      </div>
+      <div *ngIf="errorMessage" class="alert alert-error">
+        {{ errorMessage }}
+      </div>
+
+      <!-- Name Field -->
+      <div class="form-field">
+        <label for="name" class="field-label">Nombre</label>
+        <input
+          type="text"
+          id="name"
+          formControlName="name"
+          class="field-input"
+          [class.is-invalid]="submitted && f['name'].errors"
+          placeholder="Tu nombre">
+        <span *ngIf="submitted && f['name'].errors" class="error-text">
+          <span *ngIf="f['name'].errors['required']">El nombre es requerido</span>
+          <span *ngIf="f['name'].errors['minlength']">Mínimo 2 caracteres</span>
+        </span>
+      </div>
+
+      <!-- Email Field -->
+      <div class="form-field">
+        <label for="email" class="field-label">Correo Electrónico</label>
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          class="field-input"
+          [class.is-invalid]="submitted && f['email'].errors"
+          placeholder="tu@email.com">
+        <span *ngIf="submitted && f['email'].errors" class="error-text">
+          <span *ngIf="f['email'].errors['required']">El email es requerido</span>
+          <span *ngIf="f['email'].errors['email']">Email inválido</span>
+        </span>
+      </div>
+
+      <!-- Subject Field -->
+      <div class="form-field">
+        <label for="subject" class="field-label">Asunto</label>
+        <input
+          type="text"
+          id="subject"
+          formControlName="subject"
+          class="field-input"
+          [class.is-invalid]="submitted && f['subject'].errors"
+          placeholder="Asunto del mensaje">
+        <span *ngIf="submitted && f['subject'].errors" class="error-text">
+          <span *ngIf="f['subject'].errors['required']">El asunto es requerido</span>
+          <span *ngIf="f['subject'].errors['minlength']">Mínimo 3 caracteres</span>
+        </span>
+      </div>
+
+      <!-- Message Field -->
+      <div class="form-field">
+        <label for="message" class="field-label">Mensaje</label>
+        <textarea
+          id="message"
+          formControlName="message"
+          class="field-textarea"
+          [class.is-invalid]="submitted && f['message'].errors"
+          placeholder="Tu mensaje..."
+          rows="6"></textarea>
+        <span *ngIf="submitted && f['message'].errors" class="error-text">
+          <span *ngIf="f['message'].errors['required']">El mensaje es requerido</span>
+          <span *ngIf="f['message'].errors['minlength']">Mínimo 10 caracteres</span>
+        </span>
+      </div>
+
+      <!-- Buttons Container -->
+      <div class="buttons-container">
+        <button
+          type="submit"
+          class="submit-button"
+          [disabled]="loading">
+          {{ loading ? 'Enviando...' : 'Enviar Mensaje' }}
+        </button>
+
+        <button
+          type="button"
+          class="download-cv-button"
+          (click)="downloadCV()">
+          Descargar CV
+        </button>
+      </div>
+    </form>
+  </div>
+</section>

@@ -1,0 +1,15 @@
+<section class="projects-section">
+  <label class="projects-label">Mis proyectos</label>
+  <h2 class="projects-title">Proyectos</h2>
+  
+  <div class="projects-grid">
+    <div *ngFor="let project of projects" class="project-card">
+      <h3 class="project-title">{{ project.title }}</h3>
+      <p class="project-desc">{{ project.description }}</p>
+      <div class="project-techs">
+        <span *ngFor="let tech of project.technologies" class="tech-tag">{{ tech }}</span>
+      </div>
+      <a [href]="project.link" class="project-link">Ver Proyecto →</a>
+    </div>
+  </div>
+</section>

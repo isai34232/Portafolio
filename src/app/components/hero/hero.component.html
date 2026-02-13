@@ -1,0 +1,15 @@
+<section class="hero-section">
+  <div class="hero-container">
+    <div class="hero-left">
+      <label class="hero-label">{{ heroLabel }}</label>
+      <h1 class="hero-title">{{ heroTitle }}</h1>
+      <p class="hero-desc">{{ heroDesc }}</p>
+      <button class="cta-button" (click)="scrollToContact()">
+        <span>Contacto</span>
+      </button>
+    </div>
+    <div class="hero-right">
+      <img [src]="'assets/images/yo1.jpeg'" alt="Profile" class="hero-image">
+    </div>
+  </div>
+</section>
