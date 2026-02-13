@@ -1,71 +1,50 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 
 @Component({
   selector: 'app-cta',
   templateUrl: './cta.component.html',
   styleUrls: ['./cta.component.css']
 })
-export class CtaComponent implements OnInit, OnDestroy {
+export class CtaComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('elevatorContainer') elevatorContainer!: ElementRef;
   
-  ctaTitle = 'No importa de donde vengas si no a donde queires llegar...';
-  ctaDesc = '';
+  ctaTitle = 'No importa de donde vengas si no a donde quieres llegar...';
+  ctaDesc = 'Explorando las fronteras del diseño moderno con CSS.';
   
   private scrollListener!: () => void;
-  private intersectionObserver!: IntersectionObserver;
 
-  ngOnInit() {
-    this.initializeElevatorAnimation();
+  ngOnInit() {}
+
+  ngAfterViewInit() {
+    this.initializeScrollAnimation();
   }
 
   ngOnDestroy() {
     if (this.scrollListener) {
       window.removeEventListener('scroll', this.scrollListener);
     }
-    if (this.intersectionObserver) {
-      this.intersectionObserver.disconnect();
-    }
   }
 
-  private initializeElevatorAnimation() {
-    setTimeout(() => {
-      if (!this.elevatorContainer) return;
+  private initializeScrollAnimation() {
+    const container = this.elevatorContainer.nativeElement;
 
-      const container = this.elevatorContainer.nativeElement;
+    this.scrollListener = () => {
+      const rect = container.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
 
-      // Observer para detectar cuando el elemento está visible
-      this.intersectionObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            container.classList.add('active');
-          } else {
-            container.classList.remove('active');
-          }
-        });
-      });
+      // Calculamos el progreso: 0 cuando entra por abajo, 1 cuando sale por arriba
+      const totalHeight = windowHeight + rect.height;
+      const currentProgress = (windowHeight - rect.top) / totalHeight;
+      
+      const position = Math.max(0, Math.min(1, currentProgress));
+      
+      // Enviamos la posición al CSS
+      container.style.setProperty('--scroll-position', position.toString());
+    };
 
-      this.intersectionObserver.observe(container);
-
-      // Listener de scroll para controlar la animación
-      this.scrollListener = () => {
-        const rect = container.getBoundingClientRect();
-        const elementTop = rect.top;
-        const elementBottom = rect.bottom;
-        const windowHeight = window.innerHeight;
-
-        if (elementTop < windowHeight && elementBottom > 0) {
-          // El elemento está visible
-          const scrollRange = elementBottom - elementTop;
-          const visibleRange = Math.min(windowHeight, elementBottom) - Math.max(0, elementTop);
-          const scrollProgress = 1 - (visibleRange / scrollRange);
-          
-          const position = Math.max(0, Math.min(1, scrollProgress));
-          container.style.setProperty('--scroll-position', position.toString());
-        }
-      };
-
-      window.addEventListener('scroll', this.scrollListener);
-    }, 100);
+    window.addEventListener('scroll', this.scrollListener);
+    // Ejecutar una vez al inicio para posicionar elementos
+    this.scrollListener();
   }
 
   scrollToContact() {

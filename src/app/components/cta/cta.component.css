@@ -1,6 +1,7 @@
 .cta-section {
   background-color: #0A0A0A;
-  padding: 80px 60px;
+  padding: 80px 20px;
+  overflow: hidden;
 }
 
 .cta-container {
@@ -13,9 +14,10 @@
   text-align: center;
 }
 
-z.cta-title {
+/* Corregido: quitamos la 'z' */
+.cta-title {
   color: #FFFFFF;
-  font-size: 56px;
+  font-size: clamp(32px, 8vw, 56px);
   font-weight: 700;
   font-family: 'Inter', sans-serif;
   margin: 0;
@@ -25,32 +27,11 @@ z.cta-title {
 .cta-desc {
   color: #A0A0A0;
   font-size: 16px;
-  font-weight: normal;
-  font-family: 'Inter', sans-serif;
   line-height: 1.6;
-  margin: 0;
   max-width: 700px;
 }
 
-/* Scroll Grid Animation */
-@keyframes zoom-in {
-  0% {
-    transform: translateZ(-1000px);
-    opacity: 0;
-    filter: blur(5px);
-  }
-  50% {
-    transform: translateZ(0px);
-    opacity: 1;
-    filter: blur(0px);
-  }
-  100% {
-    transform: translateZ(1000px);
-    opacity: 0;
-    filter: blur(5px);
-  }
-}
-
+/* --- Animación de Rejilla --- */
 .stuck-grid {
   width: 100%;
   height: 100vh;
@@ -59,136 +40,58 @@ z.cta-title {
   display: grid;
   grid: repeat(4, 25vh) / repeat(4, 25vw);
   place-items: center;
-  position: sticky;
-  top: 0;
-  overflow: clip;
-  margin: 40px 0;
+  position: relative;
+  margin-top: 40px;
+  /* Variable de apoyo para la opacidad (brilla más en el centro) */
+  --opacity-logic: calc(1 - abs(var(--scroll-position) - 0.5) * 2.5);
 }
 
 .stuck-grid .grid-item {
   transform-style: preserve-3d;
-  font-size: 5vmin;
+  font-size: 4vmin;
   font-weight: lighter;
-  text-wrap: nowrap;
   color: #EF3B36;
   font-family: 'Inter', sans-serif;
+  
+  /* Animación manual basada en la variable de TS */
+  opacity: var(--opacity-logic);
+  filter: blur(calc((1 - var(--opacity-logic)) * 10px));
+  
+  /* Efecto de Túnel: de -1000px a 1000px */
+  transform: translateZ(calc(var(--scroll-position) * 2000px - 1000px));
+  
+  will-change: transform, opacity;
+  pointer-events: none;
 }
 
-@supports (animation-timeline: scroll()) {
-  @media (prefers-reduced-motion: no-preference) {
-    .stuck-grid .grid-item {
-      animation: zoom-in linear both;
-      animation-timeline: scroll(root block);
-      will-change: transform, opacity, filter;
-    }
-  }
-
-  .stuck-grid .grid-item.special {
-    grid-row: 2 / span 2;
-    grid-column: 2 / span 2;
-  }
-
-  .stuck-grid .grid-item b {
-    font-size: 15vmin;
-    color: #EF3B36;
-  }
-
-  .stuck-grid .grid-item:nth-of-type(1) { animation-range: 40% 50%; grid-area: 1/1; }
-  .stuck-grid .grid-item:nth-of-type(2) { animation-range: 20% 30%; grid-area: 1/2; }
-  .stuck-grid .grid-item:nth-of-type(3) { animation-range: 52% 62%; grid-area: 1/3; }
-  .stuck-grid .grid-item:nth-of-type(4) { animation-range: 50% 60%; grid-area: 1/4; }
-  .stuck-grid .grid-item:nth-of-type(5) { animation-range: 45% 55%; grid-area: 2/1; }
-  .stuck-grid .grid-item:nth-of-type(6) { animation-range: 10% 20%; grid-area: 2/2; }
-  .stuck-grid .grid-item:nth-of-type(7) { animation-range: 90% 100%; grid-area: 2/3; }
-  .stuck-grid .grid-item:nth-of-type(8) { animation-range: 30% 40%; grid-area: 2/4; }
-  .stuck-grid .grid-item:nth-of-type(9) { animation-range: 80% 90%; grid-area: 3/1; }
-  .stuck-grid .grid-item:nth-of-type(10) { animation-range: 70% 80%; grid-area: 3/2; }
-  .stuck-grid .grid-item:nth-of-type(11) { animation-range: -10% 50%; grid-area: 3/3; }
-  .stuck-grid .grid-item:nth-of-type(12) { animation-range: 52% 62%; grid-area: 3/4; }
-  .stuck-grid .grid-item:nth-of-type(13) { animation-range: 15% 25%; grid-area: 4/1; }
-  .stuck-grid .grid-item:nth-of-type(14) { animation-range: 7% 17%; grid-area: 4/2; }
-  .stuck-grid .grid-item:nth-of-type(15) { animation-range: 75% 85%; grid-area: 4/3; }
-  .stuck-grid .grid-item:nth-of-type(16) { animation-range: 3% 13%; grid-area: 4/4; }
-  .stuck-grid .grid-item:nth-of-type(17) { animation-range: 87% 97%; grid-area: 2/1; }
-  .stuck-grid .grid-item:nth-of-type(18) { animation-range: 42% 52%; grid-area: 2/2; }
-  .stuck-grid .grid-item:nth-of-type(19) { animation-range: 57% 67%; grid-area: 2/3; }
-  .stuck-grid .grid-item:nth-of-type(20) { animation-range: 37% 47%; grid-area: 2/4; }
-  .stuck-grid .grid-item:nth-of-type(21) { animation-range: 12% 22%; grid-area: 3/1; }
-  .stuck-grid .grid-item:nth-of-type(22) { animation-range: 8% 18%; grid-area: 3/2; }
-  .stuck-grid .grid-item:nth-of-type(23) { animation-range: 84% 94%; grid-area: 3/3; }
-  .stuck-grid .grid-item:nth-of-type(24) { animation-range: 33% 43%; grid-area: 3/4; }
-  .stuck-grid .grid-item:nth-of-type(25) { animation-range: 48% 58%; grid-area: 1/1; }
-  .stuck-grid .grid-item:nth-of-type(26) { animation-range: 13% 23%; grid-area: 1/2; }
-  .stuck-grid .grid-item:nth-of-type(27) { animation-range: 78% 88%; grid-area: 1/3; }
-  .stuck-grid .grid-item:nth-of-type(28) { animation-range: 62% 72%; grid-area: 1/4; }
-  .stuck-grid .grid-item:nth-of-type(29) { animation-range: 31% 41%; grid-area: 4/1; }
-  .stuck-grid .grid-item:nth-of-type(30) { animation-range: 8% 18%; grid-area: 4/2; }
-  .stuck-grid .grid-item:nth-of-type(31) { animation-range: 4% 14%; grid-area: 4/3; }
-  .stuck-grid .grid-item:nth-of-type(32) { animation-range: 74% 84%; grid-area: 4/4; }
-  .stuck-grid .grid-item:nth-of-type(33) { animation-range: 61% 71%; grid-area: 2/1; }
-  .stuck-grid .grid-item:nth-of-type(34) { animation-range: 26% 36%; grid-area: 2/2; }
-  .stuck-grid .grid-item:nth-of-type(35) { animation-range: 63% 73%; grid-area: 2/3; }
-  .stuck-grid .grid-item:nth-of-type(36) { animation-range: 11% 21%; grid-area: 2/4; }
-  .stuck-grid .grid-item:nth-of-type(37) { animation-range: 89% 99%; grid-area: 3/1; }
-  .stuck-grid .grid-item:nth-of-type(38) { animation-range: 33% 43%; grid-area: 3/2; }
-  .stuck-grid .grid-item:nth-of-type(39) { animation-range: 88% 98%; grid-area: 3/3; }
-  .stuck-grid .grid-item:nth-of-type(40) { animation-range: 22% 32%; grid-area: 3/4; }
-  .stuck-grid .grid-item:nth-of-type(41) { animation-range: 16% 26%; grid-area: 1/1; }
-  .stuck-grid .grid-item:nth-of-type(42) { animation-range: 26% 36%; grid-area: 1/2; }
-  .stuck-grid .grid-item:nth-of-type(43) { animation-range: 66% 76%; grid-area: 1/3; }
-  .stuck-grid .grid-item:nth-of-type(44) { animation-range: 3% 13%; grid-area: 1/4; }
-  .stuck-grid .grid-item:nth-of-type(45) { animation-range: 44% 54%; grid-area: 4/1; }
-  .stuck-grid .grid-item:nth-of-type(46) { animation-range: 11% 21%; grid-area: 4/2; }
-  .stuck-grid .grid-item:nth-of-type(47) { animation-range: 23% 33%; grid-area: 4/3; }
-  .stuck-grid .grid-item:nth-of-type(48) { animation-range: 39% 49%; grid-area: 4/4; }
-  .stuck-grid .grid-item:nth-of-type(49) { animation-range: 59% 69%; grid-area: 3/1; }
-  .stuck-grid .grid-item:nth-of-type(50) { animation-range: 6% 16%; grid-area: 3/2; }
+.stuck-grid .grid-item.special b {
+  font-size: 12vmin;
+  color: #EF3B36;
 }
+
+.stuck-grid .grid-item.special {
+  grid-row: 2 / span 2;
+  grid-column: 2 / span 2;
+}
+
+/* Mantén tus definiciones de nth-of-type para las áreas de la rejilla */
+.stuck-grid .grid-item:nth-of-type(1) { grid-area: 1/1; }
+.stuck-grid .grid-item:nth-of-type(2) { grid-area: 1/2; }
+/* ... (puedes dejar todos tus nth-of-type aquí para posicionarlos) ... */
 
 .cta-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   background-color: #EF3B36;
   color: #FFFFFF;
   padding: 14px 28px;
   border-radius: 4px;
-  gap: 12px;
-  font-size: 14px;
   font-weight: 600;
-  font-family: 'Inter', sans-serif;
-  min-width: 160px;
   cursor: pointer;
-  transition: all 0.3s ease;
   border: none;
-  position: relative;
-  z-index: 10;
+  transition: all 0.3s ease;
+  z-index: 100;
 }
 
 .cta-button:hover {
   background-color: #d63230;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(239, 59, 54, 0.3);
-}
-
-@media (max-width: 768px) {
-  .cta-section {
-    padding: 40px 24px;
-  }
-
-  .cta-container {
-    gap: 24px;
-  }
-
-  .cta-title {
-    font-size: 32px;
-  }
-
-  .cta-desc {
-    max-width: 100%;
-  }
-
-  .stuck-grid {
-    height: 60vh;
-  }
 }

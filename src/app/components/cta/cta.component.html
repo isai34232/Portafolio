@@ -2,11 +2,12 @@
   <div class="cta-container">
     <h2 class="cta-title">{{ ctaTitle }}</h2>
     <p class="cta-desc">{{ ctaDesc }}</p>
-      <button class="cta-button" (click)="scrollToContact()">
-      <span>Contactame</span>
+    
+    <button class="cta-button" (click)="scrollToContact()">
+      <span>Contáctame</span>
     </button>
-    <!-- Scroll Animation Grid -->
-    <div class="stuck-grid">
+
+    <div class="stuck-grid" #elevatorContainer>
       <div class="grid-item">oklch()</div>
       <div class="grid-item">scroll()</div>
       <div class="grid-item">text-box-trim</div>
@@ -58,7 +59,5 @@
       <div class="grid-item">place-content</div>
       <div class="grid-item">gap</div>
     </div>
-
-   
   </div>
 </section>
