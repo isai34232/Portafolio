@@ -30,40 +30,61 @@ export class ContactComponent {
     return this.contactForm.controls;
   }
 
-  onSubmit() {
-    this.submitted = true;
-    this.successMessage = '';
-    this.errorMessage = '';
+ onSubmit() {
 
-    if (this.contactForm.invalid) {
-      return;
-    }
+  this.submitted = true;
 
-    this.loading = true;
-    this.contactService.sendMessage(this.contactForm.value).subscribe({
-      next: (response) => {
-        this.loading = false;
-        this.successMessage = '¡Mensaje enviado correctamente! Te responderemos pronto.';
-        this.contactForm.reset();
-        this.submitted = false;
-        setTimeout(() => {
-          this.successMessage = '';
-        }, 5000);
-      },
-      error: (error) => {
-        this.loading = false;
-        this.errorMessage = 'Error al enviar el mensaje. Intenta de nuevo.';
-        console.error('Error:', error);
-      }
-    });
-  }
+  if (this.contactForm.invalid) return;
+
+  this.sendWhatsAppMessage();
+
+  this.successMessage = 'Mensaje enviado correctamente';
+
+  this.contactForm.reset();
+
+  this.submitted = false;
+
+}
+
+
 
   downloadCV() {
-    // Nombre del archivo CV que está en la carpeta assets
-    const cvFileName = 'CV_Jaciel_Isai.pdf'; // Cambia esto al nombre de tu archivo
+    
+    const cvFileName = 'CV.pdf'; 
     const link = document.createElement('a');
     link.href = `assets/${cvFileName}`;
     link.download = cvFileName;
     link.click();
   }
+
+
+
+
+sendWhatsAppMessage() {
+
+  const phone = '5580041906'; 
+  const name = this.contactForm.value.name;
+  const email = this.contactForm.value.email;
+  const subject = this.contactForm.value.subject;
+  const message = this.contactForm.value.message;
+
+  const text = `Hola, mi nombre es ${name}.
+Email: ${email}
+Asunto: ${subject}
+Mensaje: ${message}`;
+
+  const encodedText = encodeURIComponent(text);
+
+  const url = `https://wa.me/${phone}?text=${encodedText}`;
+
+  window.open(url, '_blank');
+
+}
+
+
+
+
+
+
+
 }

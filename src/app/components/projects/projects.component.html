@@ -9,7 +9,11 @@
       <div class="project-techs">
         <span *ngFor="let tech of project.technologies" class="tech-tag">{{ tech }}</span>
       </div>
-      <a [href]="project.link" class="project-link">Ver Proyecto →</a>
+      <a 
+        href="javascript:void(0)" 
+        (click)="openProject(project)"
+        class="project-link"
+      >info →</a>
     </div>
   </div>
 </section>
