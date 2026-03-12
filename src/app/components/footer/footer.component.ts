@@ -9,7 +9,7 @@ export class FooterComponent {
   currentYear = new Date().getFullYear();
 
   socialLinks = [
-    { icon: 'assets/images/linkedin-svgrepo-com.svg', label: 'LinkedIn', url: 'https://www.linkedin.com/in/hern%C3%A1ndez-ram%C3%ADrez-jaciel-isai-32b49b2ab/' },
+    { icon: 'assets/images/linkedin-svgrepo-com.svg', label: 'LinkedIn', url: 'https://www.linkedin.com/in/jaciel-isai-hern%C3%A1ndez-ram%C3%ADrez-32b49b2ab/' },
     { icon: 'assets/images/github-svgrepo-com.svg', label: 'GitHub', url: 'https://github.com/isai34232' },
     { icon: 'assets/images/facebook-svgrepo-com (1).svg', label: 'Facebook', url: 'https://www.facebook.com/jaciel.isai.0' }
   ];
