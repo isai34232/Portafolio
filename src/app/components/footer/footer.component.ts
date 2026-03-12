@@ -14,10 +14,19 @@ export class FooterComponent {
     { icon: 'assets/images/facebook-svgrepo-com (1).svg', label: 'Facebook', url: 'https://www.facebook.com/jaciel.isai.0' }
   ];
 
+  // 1. Alineamos los IDs de las secciones con los del Header
   footerLinks = [
-    { text: 'Inicio', url: '#' },
-    { text: 'Sobre mí', url: '#about' },
-    { text: 'Proyectos', url: '#projects' },
-    { text: 'Contacto', url: '#contact' }
+    { text: 'Inicio', section: 'inicio' },
+    { text: 'Sobre mí', section: 'resumen' }, // Cambiado para coincidir con el header
+    { text: 'Proyectos', section: 'proyectos' },
+    { text: 'Contacto', section: 'contacto' }
   ];
+
+  // 2. Añadimos la función de scroll
+  navigateToSection(sectionId: string) {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
 }

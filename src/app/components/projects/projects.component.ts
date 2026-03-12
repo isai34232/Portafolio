@@ -21,7 +21,7 @@ export class ProjectsComponent {
       title: 'Tesis: Sistema web y móvil para la orientación vocacional de las carreras impartidas en la Escuela Superior de Cómputo',
       description: 'Sistema web y aplicación móvil de orientación vocacional para aspirantes de la Escuela Superior de Cómputo del Instituto Politécnico Nacional, que evalúa aptitudes, intereses y preferencias mediante pruebas interactivas para apoyar la elección de carrera.',
       technologies: ['Angular', 'Node.js', 'MySQL', 'AWS','Python','IA','Java'],
-      link: '#'
+      link: 'https://escomcareer.netlify.app/inicio'
     },
     {
       id: 2,
@@ -33,16 +33,16 @@ export class ProjectsComponent {
     },
     {
       id: 3,
-      title: 'Task Management System',
-      description: 'Sistema de gestión de tareas con tableros Kanban, asignación de usuarios y seguimiento de progreso.',
-      technologies: ['Vue.js', 'Express', 'PostgreSQL', 'Socket.io'],
-      link: '#'
+      title: 'Carrito de compras ',
+      description: 'Sistema de carrito de compras para tienda de guitarras, con catálogo de productos, deacuerdo a la disponibilidad, de cada guitarra',
+      technologies: ['React', 'PostgreSQL', 'CSS', 'HTML', 'JS'],
+      link: 'https://wonderful-caramel-2bc108.netlify.app/index.html'
     },
     {
       id: 4,
-      title: 'Real Estate Portal',
-      description: 'Portal inmobiliario con búsqueda avanzada, filtros, mapas interactivos y visualización 3D.',
-      technologies: ['Angular', 'Mapbox', 'Google Maps', 'Three.js'],
+      title: 'Formulario de registro alumnos de la escuela superior de cómputo',
+      description: 'Sistema de formulario de registro para alumnos de la Escuela Superior de Cómputo, con validación de datos, almacenamiento en base de datos y generación de reportes. y pdf de confirmación de registro  ',
+      technologies: ['PHP', 'HTML', 'CSS', 'JS', 'MySQL'],
       link: '#'
     },
     {
