@@ -34,7 +34,7 @@ export class ProjectsComponent {
     {
       id: 3,
       title: 'Carrito de compras ',
-      description: 'Sistema de carrito de compras para tienda de guitarras, con catálogo de productos, para eliminar agregar articulos de cada guitarra.',
+      description: 'Sistema de carrito de compras para tienda de guitarras, con catálogo de productos, para eliminar y agregar articulos de cada guitarra.',
       technologies: ['React', 'PostgreSQL', 'CSS', 'HTML', 'JS'],
       link: 'https://wonderful-caramel-2bc108.netlify.app/index.html'
     },
